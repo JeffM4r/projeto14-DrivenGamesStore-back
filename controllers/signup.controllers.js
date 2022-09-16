@@ -10,7 +10,7 @@ const create = async (req,res) => {
     try {
         users = await db.collection("registered").find().toArray();
 
-        const found = users.find(user => user.user === user);
+        const found = users.find(user2 => user2.user === user);
 
         if(found){
             res.status(409).send("User already registered");
