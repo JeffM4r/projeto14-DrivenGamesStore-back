@@ -34,7 +34,7 @@ const create = async (req, res) => {
                 _id: alreadyLogged._id
             }, { $set: alreadyLogged })
 
-            res.status(200).send({token:alreadyLogged.token, name:found.name});
+            res.status(200).send({token:alreadyLogged.token, name:found.name, user:found.user});
             return
         }
 
