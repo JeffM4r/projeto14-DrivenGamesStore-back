@@ -3,15 +3,16 @@ import joi from "joi";
 const tokenSchema = joi.string().required()
 
 function hasValidToken(req, res, next) {
-    const Authorization = req.headers.Authorization;
-    const hasBearer = Authorization.includes("Bearer ")
+    const authorization = req.headers.authorization;
+
+    const hasBearer = authorization.includes("Bearer ")
 
     if (!hasBearer) {
         res.status(422).send("invalid token");
         return
     }
 
-    const token = Authorization?.replace("Bearer ", "")
+    const token = authorization?.replace("Bearer ", "")
 
     if (!token) {
         res.status(401).send("invalid token");
