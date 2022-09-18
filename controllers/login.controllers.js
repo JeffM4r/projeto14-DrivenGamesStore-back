@@ -5,7 +5,7 @@ import mongo from "../db/db.js";
 let db = await mongo();
 
 const create = async (req, res) => {
-    const { email, password } = req.body
+    const { email, password } = res.locals.user;
     let users;
 
     try {
@@ -34,7 +34,7 @@ const create = async (req, res) => {
                 _id: alreadyLogged._id
             }, { $set: alreadyLogged })
 
-            res.status(200).send({token:alreadyLogged.token, name:found.name});
+            res.status(200).send({token:alreadyLogged.token, name:found.name, user:found.user});
             return
         }
 
@@ -46,7 +46,7 @@ const create = async (req, res) => {
                 time:Date.now()
             })
 
-            res.status(200).send({token:token, name: found.name});
+            res.status(200).send({token:token, name: found.name, user:found.user});
             return
         }
         

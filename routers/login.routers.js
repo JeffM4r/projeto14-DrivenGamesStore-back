@@ -4,6 +4,6 @@ import * as loginController from "../controllers/login.controllers.js";
 
 const router = express.Router();
 
-router.post("/login",loginValidation, loginController.create);
+router.post("/signin",loginValidation, loginController.create);
 
 export default router;
