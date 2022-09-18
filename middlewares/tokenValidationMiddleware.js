@@ -5,6 +5,11 @@ const tokenSchema = joi.string().required()
 function hasValidToken(req, res, next) {
     const authorization = req.headers.authorization;
 
+    if (!authorization) {
+        res.status(401).send("no token received");
+        return
+    }
+
     const hasBearer = authorization.includes("Bearer ")
 
     if (!hasBearer) {

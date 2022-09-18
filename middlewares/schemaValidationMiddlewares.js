@@ -14,6 +14,13 @@ const signupSchema = joi.object({
     img: joi.string().required()
 })
 
+const purchaseBodySchema = joi.object({
+    cardName: joi.string().required(),
+    cardNumber: joi.string().required().length(16),
+    cardCode: joi.string().required().length(3),
+    cardValidationDate: joi.string().required(),
+})
+
 function loginValidation(req, res, next) {
     const login = req.body;
     const validateLogin = loginSchema.validate(login)
@@ -42,4 +49,18 @@ function signUpValidation(req, res, next) {
     next();
 }
 
-export { signUpValidation, loginValidation };
+function purchaseBodyValidation(req, res, next) {
+    const purchaseBody = req.body;
+    const validatePurchaseBody = purchaseBodySchema.validate(purchaseBody)
+
+    if (validatePurchaseBody.error) {
+        res.status(422).send("preencha corretamente os campos");
+        return;
+    } else {
+        res.locals.user = req.body;
+    }
+
+    next();
+}
+
+export { signUpValidation, loginValidation, purchaseBodyValidation };

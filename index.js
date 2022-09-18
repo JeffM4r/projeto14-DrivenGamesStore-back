@@ -3,6 +3,7 @@ import cors from "cors";
 import signUpRouter from "./routers/signup.routers.js";
 import loginRouter from "./routers/login.routers.js";
 import productsRouter from "./routers/products.routers.js"
+import finishPurchaseRouter from "./routers/finishPurchase.routers.js"
 
 import mongo from "./db/db.js";
 let db = await mongo();
@@ -15,6 +16,7 @@ server.use(express.json());
 server.use(signUpRouter);
 server.use(loginRouter);
 server.use(productsRouter);
+server.use(finishPurchaseRouter);
 
 
 server.listen(process.env.PORT,()=>{
